@@ -1,0 +1,26 @@
+{
+  "name": "shoppinglist",
+  "version": "1.0.0",
+  "description": "MERN stack app",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Affner Lefevre",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^4.1.0",
+    "express": "^4.17.0",
+    "mongoose": "^5.5.11",
+    "react": "^16.8.6",
+    "react-scripts": "^3.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
+}
