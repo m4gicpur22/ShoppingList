@@ -1,25 +1,28 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const path = require('path');
 const items = require('./Routes/Api/items');
+const config = require('config');
 
 const app = express();
 
 //Body Parser middleware
-app.use(bodyParser.json());
+app.use(express.json());
 
 //MongoDB conifguration
-const DB = require('./config/keys.js').mongoURI;
+const DB = config.get('mongoURI');
 //Ran to error: When IP whitelisting, use /0 after IP to enable configuraion on all ports
 //connecting to mongoDB
 mongoose
-    .connect(DB, { useNewUrlParser: true })
+    .connect(DB, { useNewUrlParser: true, useCreateIndex: true })
     .then(() => console.log('MongoDB Connected.'))
     .catch(err => console.log(err));
 
 //routes init
-app.use('/api/items', items);
+app.use('/api/items', require('./Routes/Api/items'));
+app.use('/api/users', require('./Routes/Api/Users'));
+app.use('/api/auth', require('./Routes/Api/auth'));
 
 //allowing us to deploy to production/heroku
 if(process.env.NODE_ENV == 'production') {

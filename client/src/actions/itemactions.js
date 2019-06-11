@@ -11,7 +11,7 @@ export const getItems = () => dispatch => {
             })
         )
 };
-
+//error around adding items, couldn't add items but delete works fine
 export const addItem = item => dispatch => {
     axios
     .post('/api/items', item)
